@@ -10,14 +10,14 @@ class Company {
   String bs;
 
   factory Company.fromJson(Map<String, dynamic> json) => Company(
-    name: json["name"],
-    catchPhrase: json["catchPhrase"],
-    bs: json["bs"],
-  );
+        name: json["name"],
+        catchPhrase: json["catchPhrase"],
+        bs: json["bs"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "name": name,
-    "catchPhrase": catchPhrase,
-    "bs": bs,
-  };
+        "name": name,
+        "catchPhrase": catchPhrase,
+        "bs": bs,
+      };
 }

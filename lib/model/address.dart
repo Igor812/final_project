@@ -1,8 +1,5 @@
 import 'geo.dart';
 
-
-
-
 class Address {
   Address({
     required this.street,
@@ -19,18 +16,18 @@ class Address {
   Geo geo;
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
-    street: json["street"],
-    suite: json["suite"],
-    city: json["city"],
-    zipcode: json["zipcode"],
-    geo: Geo.fromJson(json["geo"]),
-  );
+        street: json["street"],
+        suite: json["suite"],
+        city: json["city"],
+        zipcode: json["zipcode"],
+        geo: Geo.fromJson(json["geo"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "street": street,
-    "suite": suite,
-    "city": city,
-    "zipcode": zipcode,
-    "geo": geo.toJson(),
-  };
+        "street": street,
+        "suite": suite,
+        "city": city,
+        "zipcode": zipcode,
+        "geo": geo.toJson(),
+      };
 }

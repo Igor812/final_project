@@ -19,8 +19,8 @@ Future<List<User>> _fetchUsersList() async {
 }
 
 Future<List<Detail>> _detailUsersList() async {
-  final response = await http
-      .get(Uri.parse("https://jsonplaceholder.typicode.com/todos?userId="+detailId!));
+  final response = await http.get(Uri.parse(
+      "https://jsonplaceholder.typicode.com/todos?userId=" + detailId!));
 
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
@@ -59,7 +59,6 @@ class FirstScreen extends StatefulWidget {
 
 class _FirstScreen extends State<FirstScreen> {
   late Future<List<User>> futureUsersList;
-
 
   @override
   void initState() {
@@ -126,23 +125,23 @@ class _FirstScreen extends State<FirstScreen> {
                 ],
               )),
         ),
-              ListTile(
-                leading: const Icon(Icons.first_page),
-                title: const Text('Список пользователей'),
-                onTap: () {
-                  Navigator.popAndPushNamed(context, '/');
-                },
-              ),
-              Divider(),
-              ListTile(
-                leading: const Icon(Icons.navigate_next),
-                title: const Text('Детальная информация'),
-                onTap: () {
-                  Navigator.popAndPushNamed(context, '/DetailScreen');
-                },
-              ),
-              Divider(),
-            ]));
+        ListTile(
+          leading: const Icon(Icons.first_page),
+          title: const Text('Список пользователей'),
+          onTap: () {
+            Navigator.popAndPushNamed(context, '/');
+          },
+        ),
+        Divider(),
+        ListTile(
+          leading: const Icon(Icons.navigate_next),
+          title: const Text('Детальная информация'),
+          onTap: () {
+            Navigator.popAndPushNamed(context, '/DetailScreen');
+          },
+        ),
+        Divider(),
+      ]));
 
   Widget _bottomNavigationBar() => BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -175,19 +174,20 @@ class _FirstScreen extends State<FirstScreen> {
       }
     });
   }
+
   ListTile _userListTile(int id, String title, String subtitle) => ListTile(
-    onTap: () {
-      detailId = id.toString();
-      Navigator.popAndPushNamed(context, '/DetailScreen');
-    },
-    leading: Text(id.toString()),
-    title: Text(title,
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 20,
-        )),
-    subtitle: Text(subtitle),
-  );
+        onTap: () {
+          detailId = id.toString();
+          Navigator.popAndPushNamed(context, '/DetailScreen');
+        },
+        leading: Text(id.toString()),
+        title: Text(title,
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 20,
+            )),
+        subtitle: Text(subtitle),
+      );
 
   ListView _usersListView(data) {
     return ListView.builder(
@@ -197,10 +197,9 @@ class _FirstScreen extends State<FirstScreen> {
               data[index].id, data[index].name, data[index].email);
         });
   }
+
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
         appBar: _appBar(),
         drawer: _navigationDraw(),
@@ -234,13 +233,12 @@ class _DetailScreen extends State<DetailScreen> {
   late Future<List<Detail>> futureDetailList;
   late List<Detail> detailListData;
 
-
-
   @override
   void initState() {
     super.initState();
     futureDetailList = _detailUsersList();
   }
+
   late int userNum = 1;
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
@@ -301,23 +299,23 @@ class _DetailScreen extends State<DetailScreen> {
                 ],
               )),
         ),
-              ListTile(
-                leading: const Icon(Icons.first_page),
-                title: const Text('Список пользователей'),
-                onTap: () {
-                  Navigator.popAndPushNamed(context, '/');
-                },
-              ),
-              Divider(),
-              ListTile(
-                leading: const Icon(Icons.navigate_next),
-                title: const Text('Детальная информация'),
-                onTap: () {
-                  Navigator.popAndPushNamed(context, '/DetailScreen');
-                },
-              ),
-              Divider(),
-            ]));
+        ListTile(
+          leading: const Icon(Icons.first_page),
+          title: const Text('Список пользователей'),
+          onTap: () {
+            Navigator.popAndPushNamed(context, '/');
+          },
+        ),
+        Divider(),
+        ListTile(
+          leading: const Icon(Icons.navigate_next),
+          title: const Text('Детальная информация'),
+          onTap: () {
+            Navigator.popAndPushNamed(context, '/DetailScreen');
+          },
+        ),
+        Divider(),
+      ]));
 
   Widget _bottomNavigationBar() => BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -353,81 +351,79 @@ class _DetailScreen extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
-
-    Container _detailListTile(int indexUser, String subtitle, bool text) => Container(
-
-      padding: EdgeInsets.all(20),
-
-          child: Column(
-
-              children: [
-
-            Text("Задача: " + subtitle, style: TextStyle(fontSize: 16, color: Colors.black,)),
-            Text("Исполнитель:" + usersListData.elementAt(indexUser-1).name),
-            Text("E-mail: " + usersListData.elementAt(indexUser-1).email),
-            Text("website: " + usersListData.elementAt(indexUser-1).website),
-            Text("phone: " + usersListData.elementAt(indexUser-1).phone),
-            Text("city: " + usersListData.elementAt(indexUser-1).address.city),
-            Text("company: " + usersListData.elementAt(indexUser-1).company.name.toString()),
-            Text("ID пользователя:  " + indexUser.toString()),
+    Container _detailListTile(int indexUser, String subtitle, bool text) =>
+        Container(
+          padding: EdgeInsets.all(20),
+          child: Column(children: [
+            Column(children: <Widget>[
+              Text("Задача: " + subtitle,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                  )),
+              Text(
+                  "   Исполнитель:" +
+                      "  ID-" +
+                      indexUser.toString() +
+                      "   " +
+                      usersListData.elementAt(indexUser - 1).name +
+                      ".",
+                  style: TextStyle(fontSize: 12)),
+              Text("phone: " + usersListData.elementAt(indexUser - 1).phone,
+                  style: TextStyle(fontSize: 12)),
+              Text("e-mail: " + usersListData.elementAt(indexUser - 1).email,
+                  style: TextStyle(fontSize: 12)),
+              Text(
+                  "company: " +
+                      usersListData.elementAt(indexUser - 1).company.name +
+                      ",     city: " +
+                      usersListData.elementAt(indexUser - 1).address.city,
+                  style: TextStyle(fontSize: 12)),
+            ]),
             SizedBox(
               height: 5,
             ),
-        //    Text("Задача:  " + subtitle, style: TextStyle(fontSize: 16, color: Colors.black),),
             Row(
               children: [
                 Checkbox(
-                  checkColor: Colors.black,
+                    checkColor: Colors.black,
                     value: text,
                     onChanged: (bool? value) {
-                    setState(() {});
-                }),
+                      setState(() {});
+                    }),
                 Text("Задача завершена"),
               ],
             )
           ]),
         );
 
-
     ListView _detailListView(data, detailId) {
       return ListView.builder(
-         // itemCount: data.length,
+          // itemCount: data.length,
           itemBuilder: (context, detailId) {
-            return _detailListTile(
-                data[detailId].userId, data[detailId].title, data[detailId].completed);
-          });
+        return _detailListTile(data[detailId].userId, data[detailId].title,
+            data[detailId].completed);
+      });
     }
 
-
     return Scaffold(
-        appBar: _appBar(),
-        drawer: _navigationDraw(),
-        bottomNavigationBar: _bottomNavigationBar(),
-        body: Center(
+      appBar: _appBar(),
+      drawer: _navigationDraw(),
+      bottomNavigationBar: _bottomNavigationBar(),
+      body: Center(
+        child: FutureBuilder<List<Detail>>(
+            future: futureDetailList,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                detailListData = snapshot.data!;
+                return _detailListView(detailListData, detailId);
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              }
 
-              child: FutureBuilder<List<Detail>>(
-                  future: futureDetailList,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      detailListData = snapshot.data!;
-                      return _detailListView(detailListData, detailId);
-                    } else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
-                    }
-
-                    return const CircularProgressIndicator();
-                  }
-              ),
-            ),
-
-
-        );
-
-
-
-
-
+              return const CircularProgressIndicator();
+            }),
+      ),
+    );
   }
 }
